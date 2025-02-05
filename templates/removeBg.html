@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="remove-bg">
+    <h2>Remover Fondo de Imagen</h2>
+    <p>Carga tu imagen y elimina su fondo automáticamente.</p>
+    <form action="/remove_background" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Procesar Imagen</button>
+    </form>
+    <div class="result">
+        {% if result %}
+        <h3>Resultado:</h3>
+        <img src="{{ result }}" alt="Imagen procesada">
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

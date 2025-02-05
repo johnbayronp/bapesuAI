@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <h1>Bienvenido a Bapesu AI</h1>
+    <p>Descubre herramientas inteligentes para transformar tus proyectos.</p>
+    <a href="#tools" class="btn">Explorar herramientas</a>
+</section>
+
+<section id="tools" class="tools">
+    <h2>Nuestras herramientas</h2>
+    <div class="tool-list">
+        <a href="/removebg" class="tool-card">
+            <h3>Remover Fondo de imagen</h3>
+            <p>Automatiza la creación de contenido de manera rápida y eficiente, Elimina el fondo gratis.</p>
+        </a>
+        <div class="tool-card">
+            <h3>Analizador de datos</h3>
+            <p>Muy pronto...</p>
+        </div>
+        <div class="tool-card">
+            <h3>Reconocimiento de imágenes</h3>
+            <p>Muy pronto...</p>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <h2>Sobre mí</h2>
+    <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Jhon Perez">
+    <p>Hola, soy Jhon Perez el creador de Bapesu AI, apasionado por la inteligencia artificial y las soluciones innovadoras.</p>
+    <div class="social">
+        <span>Instagram:</span> 
+        <a href="https://www.instagram.com/johnbayronp" target="_blank">@johnbayronp</a>
+    </div>
+    <strong>¡Gracias por visitar! - Sacale el jugo </strong>
+</section>
+
+{% endblock %}
