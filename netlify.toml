@@ -1,0 +1,16 @@
+[build]
+  command = "pip install -r requirements.txt && python setup.py install && your-build-command"
+  publish = "build"
+
+
+[build.environment]
+  PYTHON_VERSION = "3.11.2"  # Asegúrate de usar una versión compatible
+
+# Instala paquetes del sistema (Ubuntu)
+[[plugins]]
+package = "netlify-plugin-python"
+  [plugins.inputs]
+    installCommands = [
+      "sudo apt-get update",
+      "sudo apt-get install -y python3-dev python3-pip build-essential"
+    ]
