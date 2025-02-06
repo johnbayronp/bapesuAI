@@ -4,7 +4,7 @@
 
 
 [build.environment]
-  PYTHON_VERSION = "3.11.2"  # Asegúrate de usar una versión compatible
+  PYTHON_VERSION = "3.13.2"  # Asegúrate de usar una versión compatible
 
 # Instala paquetes del sistema (Ubuntu)
 [[plugins]]
