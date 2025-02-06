@@ -4,15 +4,85 @@
 <section class="remove-bg">
     <h2>Remover Fondo de Imagen</h2>
     <p>Carga tu imagen y elimina su fondo automáticamente.</p>
-    <form action="/remove_background" method="POST" enctype="multipart/form-data">
+    <form id="uploadForm" action="/removebg" method="POST" enctype="multipart/form-data">
         <input type="file" name="file" accept="image/*" required>
         <button type="submit">Procesar Imagen</button>
     </form>
+
+    <!-- Barra de carga -->
+    <div id="loading" style="display:none;">
+        <p>Procesando imagen...</p>
+        <div class="progress">
+            <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <!-- Resultado -->
     <div class="result">
-        {% if result %}
+        {% if image_url %}
         <h3>Resultado:</h3>
-        <img src="{{ result }}" alt="Imagen procesada">
+        <image src="{{ image_url }}" alt="Imagen procesada" class="processed-image"/>
+        <br>
+        <a href="{{ image_url }}" class="download-btn" download>Descargar Imagen Procesada</a>
+        {% else %}
+        <p>No se ha procesado ninguna imagen.</p>
         {% endif %}
     </div>
 </section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('#uploadForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        // Mostrar la barra de carga
+        $('#loading').show();
+        $('#progressBar').css('width', '0%');  // Asegurarse de que comience en 0%
+        $('.result').html(''); // limpiar respuestas viejas 
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: '/removebg',  // La ruta donde se procesa la imagen
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            xhr: function() {
+                var xhr = new XMLHttpRequest();
+                xhr.upload.addEventListener('progress', function(e) {
+                    if (e.lengthComputable) {
+                        var percent = (e.loaded / e.total) * 100;
+                        $('#progressBar').css('width', percent + '%');
+                    }
+                }, false);
+                return xhr;
+            },
+            success: function(data) {
+                // Ocultar la barra de carga y mostrar el resultado
+                $('#loading').hide();
+                console.log(data);  // Para depurar el contenido de la respuesta
+
+                // Verificar si se recibió una URL de la imagen
+                if (data.image_url) {
+                    $('.result').html(`
+                        <h3>Resultado:</h3>
+                        <image src="${data.image_url}?t=${new Date().getTime()}" alt="Imagen procesada" class="processed-image" style="max-width: 100%; height: auto;">
+                        <br>
+                        <a href="${data.image_url}" download class="download-btn">Descargar Imagen Procesada</a>
+                    `);
+                } else {
+                    alert("No se pudo procesar la imagen.");
+                }  
+            },
+            error: function() {
+                $('#loading').hide();
+                alert("Hubo un error procesando la imagen.");
+            }
+        });
+    });
+});
+
+</script>
+
 {% endblock %}

@@ -362,3 +362,39 @@ header nav {
         transform: rotate(-45deg) translate(5px, -5px);
     }
 }
+
+
+/*** REMOVE BACKGROUND PAGE ***/
+.processed-image {
+    width: 50%;  /* Ajusta el tamaño de la imagen según lo que prefieras */
+    height: auto;
+    margin-top: 20px;
+    transition: transform 0.3s ease-in-out;  /* Agrega una animación suave al pasar el cursor */
+}
+
+.processed-image:hover {
+    transform: scale(1.1);  /* Efecto de aumentar la imagen cuando pasa el cursor */
+}
+
+.download-btn {
+    display: inline-block;
+    background-color: #4CAF50;  /* Fondo verde */
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;  /* Animación suave para el botón */
+}
+
+.download-btn:hover {
+    background-color: #45a049;  /* Color más oscuro al pasar el cursor */
+    transform: scale(1.1);  /* Aumenta el tamaño del botón cuando se pasa el cursor */
+}
+
+.download-btn:active {
+    transform: scale(1);  /* Vuelve a su tamaño original cuando se hace clic */
+}
+/*** /REMOVE BACKGROUND PAGE ***/
